@@ -47,7 +47,7 @@ int main (int argc, char **argv, char **env)
 
 	while ((command_line = readline((char *)PROMPT)) != NULL)
 	{
-		char *cmd, *args;
+		char *cmd, *args[] = {NULL, NULL};
 		int s;
 		s = parse (command_line, cmd, args);
 		if (!s)
