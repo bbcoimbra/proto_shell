@@ -69,9 +69,28 @@ int parse(char *command_line, char *ret_cmd, char **ret_args)
 
 void my_execute(char *cmd, char **args, char **env)
 {
-	// pid_t child;
-	if (!execute_internal_cmd(cmd, args))
-		fputs("Not internal command\n", stderr);
+	pid_t child_pid;
+	if (execute_internal_cmd(cmd, args))
+		return;
+
+	fprintf(stderr, "%s isn't an internal command\nforking\n", cmd);
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("fork");
+	}
+	if(child_pid != 0) /* Parent */
+	{
+		int status;
+		waitpid(child_pid, &status, 0);
+	}
+	else /* Child */
+	{
+		fputs(cmd, stderr);
+		execve(cmd, args, env);
+		perror("execve");
+		exit(EXIT_FAILURE);
+	}
 	return;
 }
 
