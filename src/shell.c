@@ -49,11 +49,9 @@ int main (int argc, char **argv, char **env)
 	{
 		char *cmd, *args;
 		int s;
-		s = parse (command_line, cmd, &args);
-		if (s)
-			fputs ("Couldn't parse command\n", stderr);
-		else
-			my_execute (cmd, &args);
+		s = parse (command_line, cmd, args);
+		if (!s)
+			my_execute (cmd, args, env);
 	}
 	bye();
 	exit(EXIT_SUCCESS);
