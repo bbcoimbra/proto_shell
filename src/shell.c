@@ -80,7 +80,6 @@ void my_execute(char *cmd, char **args, char **env)
 	if (execute_internal_cmd(cmd, args))
 		return;
 
-	fprintf(stderr, "%s isn't an internal command\nforking\n", cmd);
 	child_pid = fork();
 	if (child_pid == -1)
 	{
