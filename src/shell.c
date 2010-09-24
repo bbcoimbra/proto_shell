@@ -34,7 +34,7 @@ extern int read_history ();
 #define PROMPT "proto_shell> "
 
 int parse (char *command_line, char *ret_cmd, char **ret_args);
-void my_execute (char *cmd, char **args);
+void my_execute (char *cmd, char **args, char **env);
 int execute_internal_cmd (char *cmd, char **args);
 void bye (void);
 void author (void);
@@ -67,7 +67,7 @@ int parse(char *command_line, char *ret_cmd, char **ret_args)
 	return 0;
 }
 
-void my_execute(char *cmd, char **args)
+void my_execute(char *cmd, char **args, char **env)
 {
 	// pid_t child;
 	if (!execute_internal_cmd(cmd, args))
