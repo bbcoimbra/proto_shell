@@ -37,6 +37,7 @@ int parse (char *command_line, char *ret_cmd, char **ret_args);
 void my_execute (char *cmd, char **args);
 int execute_internal_cmd (char *cmd, char **args);
 void bye (void);
+void author (void);
 
 int main (int argc, char **argv, char **env)
 {
@@ -81,9 +82,18 @@ int execute_internal_cmd(char *cmd, char **args)
 		bye();
 		exit(EXIT_SUCCESS);
 	}
+	if (strcmp(cmd, "autor") == 0)
+	{
+		author();
+		return 1;
+	}
 	return 0;
 }
 
+void author (void)
+{
+	printf("\tBruno Coimbra\n");
+}
 void bye (void)
 {
 	puts("bye");
