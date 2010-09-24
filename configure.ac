@@ -21,6 +21,9 @@ AC_CHECK_HEADERS([stdlib.h string.h unistd.h])
 AC_TYPE_PID_T
 
 # Checks for library functions.
+C_CHECK_FUNCS([strdup])
+AC_FUNC_FORK
+AC_FUNC_MALLOC
 
 
 AC_OUTPUT
