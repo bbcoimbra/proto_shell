@@ -62,9 +62,16 @@ int parse(char *command_line, char *ret_cmd, char **ret_args)
 	char *token, *cmdline;
 	cmdline = strdup(command_line);
 	token = strsep(&cmdline, (char*)" ");
-	strcpy (ret_cmd, token);
-	ret_args = NULL;
-	return 0;
+	while ((token != NULL) && strcmp(token, "") == 0)
+		token = strsep(&cmdline, (char*)" ");
+	if (token != NULL)
+	{
+		strcpy (ret_cmd, token);
+		ret_args[0] = malloc(sizeof(char)*strlen(ret_cmd));
+		strcpy(ret_args[0], ret_cmd);
+		return 0;
+	}
+	return 1;
 }
 
 void my_execute(char *cmd, char **args, char **env)
