@@ -77,7 +77,7 @@ void my_execute(char *cmd, char **args)
 
 int execute_internal_cmd(char *cmd, char **args)
 {
-	if(strcmp(cmd, "sair") == 0)
+	if (strcmp(cmd, "sair") == 0)
 	{
 		bye();
 		exit(EXIT_SUCCESS);
