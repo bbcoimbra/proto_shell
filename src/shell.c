@@ -92,7 +92,6 @@ void my_execute(char *cmd, char **args, char **env)
 	}
 	else /* Child */
 	{
-		fputs(cmd, stderr);
 		execve(cmd, args, env);
 		perror("execve");
 		exit(EXIT_FAILURE);
