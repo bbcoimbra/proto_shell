@@ -149,15 +149,29 @@ void my_execute(char *cmd, char **args, char **env)
 
 int execute_internal_cmd(char *cmd, char **args)
 {
-	if (strcmp(cmd, "sair") == 0)
+	if (strcmp(cmd, "cd") == 0)
 	{
-		bye();
-		exit(EXIT_SUCCESS);
+		if(chdir(*(args+1)) == -1)
+		{
+			perror("cd");
+			return 1;
+		}
+		return 1;
+	}
+	if (strcmp(cmd, "help") == 0)
+	{
+		help();
+		return 1;
 	}
 	if (strcmp(cmd, "autor") == 0)
 	{
 		author();
 		return 1;
+	}
+	if (strcmp(cmd, "sair") == 0)
+	{
+		bye();
+		exit(EXIT_SUCCESS);
 	}
 	return 0;
 }
