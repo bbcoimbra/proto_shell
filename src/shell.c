@@ -190,6 +190,7 @@ void help (void)
 	fprintf(stdout, "proto_shell by bbcoimbra -- SO III -- 2s2010\n\n");
 	fprintf(stdout, "\tAvaliable commands:\n\n");
 	fprintf(stdout, "\tautor\t\tPrints author name on screen\n");
+	fprintf(stdout, "\tcd <path>\t\tChange workdir to <path> \n");
 	fprintf(stdout, "\thelp\t\tThis help message\n");
 	fprintf(stdout, "\tsair\t\tExits shell\n");
 	fprintf(stdout, "\n");
