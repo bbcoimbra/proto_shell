@@ -54,6 +54,7 @@ int execute_internal_cmd (char *cmd, char **args);
 void bye (void);
 void author (void);
 void help (void);
+void version (void);
 int guess_word_num(const char *str);
 
 int main (int argc, char **argv, char **env)
@@ -171,6 +172,11 @@ int execute_internal_cmd(char *cmd, char **args)
 		author();
 		return 1;
 	}
+	if (strcmp(cmd, "version") == 0)
+	{
+		version();
+		return 1;
+	}
 	if (strcmp(cmd, "sair") == 0)
 	{
 		bye();
@@ -188,6 +194,11 @@ void bye (void)
 	fprintf(stdout, "bye\n");
 }
 
+void version (void)
+{
+  fprintf (stdout, "%s\n", VERSION);
+}
+
 void help (void)
 {
 	fprintf(stdout, "proto_shell by bbcoimbra -- SO III -- 2s2010\n\n");
@@ -196,5 +207,6 @@ void help (void)
 	fprintf(stdout, "\tcd <path>\tChange workdir to <path> \n");
 	fprintf(stdout, "\thelp\t\tThis help message\n");
 	fprintf(stdout, "\tsair\t\tExits shell\n");
+	fprintf(stdout, "\tversion\t\tPrints %s version\n", PACKAGE);
 	fprintf(stdout, "\n");
 }
