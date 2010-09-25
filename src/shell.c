@@ -65,13 +65,16 @@ int main (int argc, char **argv, char **env)
 		char *cmd, **args;
 		int s;
 		s = parse (command_line, args);
-		cmd = (char *) malloc (sizeof(char) * strlen(*args));
-		strcpy(cmd, *args);
-		if (!s)
-			my_execute (cmd, args, env);
+		if(*args)
+		{
+			cmd = (char *) malloc (sizeof(char) * strlen(*args));
+			strcpy(cmd, *args);
+			if (!s)
+				my_execute (cmd, args, env);
 
-		free(cmd);
-		free_parse(args);
+			free(cmd);
+			free_parse(args);
+		}
 	}
 	bye();
 	exit(EXIT_SUCCESS);
@@ -113,7 +116,7 @@ int parse(char *command_line, char **ret_args)
 		}
 	}
 	*aux = NULL;
-	if (strlen (*ret_args) > 0)
+	if (*ret_args && strlen (*ret_args) > 0)
 		return 0;
 	return 1;
 }
