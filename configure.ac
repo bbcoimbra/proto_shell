@@ -8,14 +8,17 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([src/shell.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile src/Makefile])
+
 # Checks for programs.
 AC_PROG_CC
-CFLAGS="-O0 -Wall -ggdb"
+AC_C_CONST
 
 # Checks for libraries.
 VL_LIB_READLINE
 # Checks for header files.
+AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h string.h unistd.h])
+AC_HEADER_SYS_WAIT
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_PID_T
