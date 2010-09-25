@@ -61,7 +61,7 @@ int main (int argc, char **argv, char **env)
 
 	while ((command_line = readline((char *)PROMPT)) != NULL)
 	{
-		char *cmd, *args[] = {NULL, NULL};
+		char *cmd, **args;
 		int s;
 		s = parse (command_line, args);
 		cmd = (char *) malloc (sizeof(char) * strlen(*args));
