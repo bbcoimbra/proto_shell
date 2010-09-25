@@ -47,7 +47,7 @@ extern int read_history ();
 
 #define PROMPT "proto_shell> "
 
-int parse (char *, char **);
+char** parse (char *);
 void free_parse(char **);
 void my_execute (char *cmd, char **args, char **env);
 int execute_internal_cmd (char *cmd, char **args);
@@ -64,8 +64,8 @@ int main (int argc, char **argv, char **env)
 	{
 		char *cmd, **args;
 		int s;
-		s = parse (command_line, args);
-		if(*args)
+		args = parse (command_line);
+		if(args)
 		{
 			cmd = (char *) malloc (sizeof(char) * strlen(*args));
 			strcpy(cmd, *args);
@@ -98,13 +98,13 @@ int guess_word_num(const char *str)
 	return count;
 }
 
-int parse(char *command_line, char **ret_args)
+char **parse(char *command_line)
 {
-	char *token, *cmdline, **aux;
+	char *token, *cmdline, **aux, **ret_args;
 	int str_count = guess_word_num (command_line);
 
-  *ret_args = (char *) malloc (sizeof (char *) * (str_count + 1));
-	memset(*ret_args, '\0', str_count + 1 );
+  ret_args = (char **) malloc (sizeof (char *) * (str_count + 1));
+	memset(ret_args, '\0', str_count + 1 );
 	cmdline = strdup (command_line);
 	aux = ret_args;
 	while ((token = strsep (&cmdline, (char*) " ")) != NULL)
@@ -117,8 +117,8 @@ int parse(char *command_line, char **ret_args)
 	}
 	*aux = NULL;
 	if (*ret_args && strlen (*ret_args) > 0)
-		return 0;
-	return 1;
+		return ret_args;
+	return NULL;
 }
 
 void free_parse(char **args)
