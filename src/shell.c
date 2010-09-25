@@ -45,7 +45,7 @@ extern int read_history ();
 #endif /* HAVE_READLINE_HISTORY */
 
 
-#define PROMPT "proto_shell> "
+#define PROMPT "proto-shell> "
 
 char** parse (char *);
 void free_parse(char **);
