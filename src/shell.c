@@ -1,3 +1,15 @@
+/* shell.c -- implements simple shell prototype.
+ *
+ * licence: view LICENCE file on project root
+ *
+ * author: view AUTHORS file on project root
+ *
+ * changelog: please visit http://github.com/bbcoimbra/proto_shell
+ *            or clone repository using command below:
+ *            git clone git://github.com/bbcoimbra/proto_shell.git
+ *
+ */
+
 #include <config.h>
 #include <unistd.h>
 #include <stdlib.h>
