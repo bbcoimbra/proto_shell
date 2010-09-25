@@ -10,7 +10,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile src/Makefile])
 # Checks for programs.
 AC_PROG_CC
-CFLAGS="-O0 -Wall"
+CFLAGS="-O0 -Wall -ggdb"
 
 # Checks for libraries.
 VL_LIB_READLINE
