@@ -5,13 +5,5 @@ config.*
 .deps
 Makefile
 **/Makefile
-Makefile.in
-**/Makefile.in
-autom4te.cache
-configure
-depcomp
-install-sh
-missing
 src/proto_shell
-stamp-h1
 
