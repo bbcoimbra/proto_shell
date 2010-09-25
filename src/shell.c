@@ -141,7 +141,7 @@ void my_execute(char *cmd, char **args, char **env)
 	else /* Child */
 	{
 		execve(cmd, args, env);
-		perror("execve");
+		perror("proto_shell");
 		exit(EXIT_FAILURE);
 	}
 	return;
