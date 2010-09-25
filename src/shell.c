@@ -47,11 +47,13 @@ extern int read_history ();
 
 #define PROMPT "proto_shell> "
 
-int parse (char *command_line, char *ret_cmd, char **ret_args);
+int parse (char *, char **);
 void my_execute (char *cmd, char **args, char **env);
 int execute_internal_cmd (char *cmd, char **args);
 void bye (void);
 void author (void);
+void help (void);
+int guess_word_num(const char *str);
 
 int main (int argc, char **argv, char **env)
 {
@@ -61,7 +63,9 @@ int main (int argc, char **argv, char **env)
 	{
 		char *cmd, *args[] = {NULL, NULL};
 		int s;
-		s = parse (command_line, cmd, args);
+		s = parse (command_line, args);
+		cmd = (char *) malloc (sizeof(char) * strlen(*args));
+		strcpy(cmd, *args);
 		if (!s)
 			my_execute (cmd, args, env);
 	}
@@ -69,20 +73,44 @@ int main (int argc, char **argv, char **env)
 	exit(EXIT_SUCCESS);
 }
 
-int parse(char *command_line, char *ret_cmd, char **ret_args)
+int guess_word_num(const char *str)
 {
-	char *token, *cmdline;
-	cmdline = strdup(command_line);
-	token = strsep(&cmdline, (char*)" ");
-	while ((token != NULL) && strcmp(token, "") == 0)
-		token = strsep(&cmdline, (char*)" ");
-	if (token != NULL)
+	char *aux;
+	int count = 0;
+
+	aux = (char *) str;
+	while (*aux != '\0')
 	{
-		strcpy (ret_cmd, token);
-		ret_args[0] = malloc(sizeof(char)*strlen(ret_cmd));
-		strcpy(ret_args[0], ret_cmd);
-		return 0;
+		if (*aux != ' ')
+			count++;
+		while (*aux != '\0' && *aux != ' ')
+			aux++;
+		if (*aux == ' ')
+			aux++;
 	}
+	return count;
+}
+
+int parse(char *command_line, char **ret_args)
+{
+	char *token, *cmdline, **aux;
+	int str_count = guess_word_num (command_line);
+
+  *ret_args = (char *) malloc (sizeof (char *) * (str_count + 1));
+	memset(*ret_args, '\0', str_count + 1 );
+	cmdline = strdup (command_line);
+	aux = ret_args;
+	while ((token = strsep (&cmdline, (char*) " ")) != NULL)
+	{
+		if (strcmp (token, (char *) "") != 0)
+		{
+			*aux = token;
+			aux++;
+		}
+	}
+	*aux = NULL;
+	if (strlen (*ret_args) > 0)
+		return 0;
 	return 1;
 }
 
@@ -132,5 +160,15 @@ void author (void)
 }
 void bye (void)
 {
-	puts("bye");
+	fprintf(stdout, "bye\n");
+}
+
+void help (void)
+{
+	fprintf(stdout, "proto_shell by bbcoimbra -- SO III -- 2s2010\n\n");
+	fprintf(stdout, "\tAvaliable commands:\n\n");
+	fprintf(stdout, "\tautor\t\tPrints author name on screen\n");
+	fprintf(stdout, "\thelp\t\tThis help message\n");
+	fprintf(stdout, "\tsair\t\tExits shell\n");
+	fprintf(stdout, "\n");
 }
