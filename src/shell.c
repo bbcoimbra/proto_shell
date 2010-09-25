@@ -178,7 +178,7 @@ int execute_internal_cmd(char *cmd, char **args)
 
 void author (void)
 {
-	printf("\tBruno Coimbra\n");
+	fprintf(stdout, "\tBruno Coimbra\n");
 }
 void bye (void)
 {
