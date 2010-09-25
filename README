@@ -1,9 +1,11 @@
-# proto_shell
+proto_shell
+===========
+
 Pequeno projeto para a implementação de um protótipo de shell.
 
 Esta implementação foi desenvolvida como atividade complementar
-d disciplina de SO III do curso de Processamento de Dados da
-FATEC-SP.
+da disciplina de SO III do curso de Processamento de Dados da
+*FATEC-SP*.
 
 ## Instalação
 O processo de instalação está descrito no arquivo INSTALL na raiz do
