@@ -65,15 +65,12 @@ int main (int argc, char **argv, char **env)
 	while ((command_line = readline((char *)PROMPT)) != NULL)
 	{
 		char *cmd, **args;
-		int s;
 		args = parse (command_line);
 		if(args)
 		{
 			cmd = (char *) malloc (sizeof(char) * strlen(*args));
 			strcpy(cmd, *args);
-			if (!s)
-				my_execute (cmd, args, env);
-
+			my_execute (cmd, args, env);
 			free(cmd);
 			free_parse(args);
 		}
