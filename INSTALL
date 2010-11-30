@@ -1,0 +1,8 @@
+caso
+    configure && make && ./src/proto_shell
+
+não execute o shell, execute primeiramente:
+
+    autoreconf --install
+
+e em seguida o primeiro comando.
