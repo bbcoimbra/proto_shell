@@ -230,6 +230,7 @@ void help (void)
 	fprintf(stdout, "\tautor\t\tPrints author name on screen\n");
 	fprintf(stdout, "\tcd <path>\tChange workdir to <path> \n");
 	fprintf(stdout, "\thelp\t\tThis help message\n");
+	fprintf(stdout, "\thistorico\tPrints last up to 20 history commands\n");
 	fprintf(stdout, "\tsair\t\tExits shell\n");
 	fprintf(stdout, "\tversion\t\tPrints %s version\n", PACKAGE);
 	fprintf(stdout, "\n");
