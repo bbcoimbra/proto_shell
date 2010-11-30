@@ -47,6 +47,7 @@ extern int read_history ();
 
 
 #define PROMPT "proto-shell> "
+#define MAX_HISTORY 20
 
 char** parse (char *);
 void free_parse(char **);
@@ -56,15 +57,20 @@ void bye (void);
 void author (void);
 void help (void);
 void version (void);
+void print_history(void);
 int guess_word_num(const char *str);
 
 int main (int argc, char **argv, char **env)
 {
 	char *command_line;
 
+	using_history();
+	stifle_history(MAX_HISTORY);
+	read_history(NULL);
 	while ((command_line = readline((char *)PROMPT)) != NULL)
 	{
 		char *cmd, **args;
+		add_history(command_line);
 		args = parse (command_line);
 		if(args)
 		{
@@ -75,6 +81,7 @@ int main (int argc, char **argv, char **env)
 			free_parse(args);
 		}
 	}
+	write_history(NULL);
 	bye();
 	exit(EXIT_SUCCESS);
 }
@@ -175,6 +182,11 @@ int execute_internal_cmd(char *cmd, char **args)
 		version();
 		return 1;
 	}
+	if (strcmp(cmd, "historico" ) == 0)
+	{
+		print_history();
+		return 1;
+	}
 	if (strcmp(cmd, "sair") == 0)
 	{
 		bye();
@@ -195,6 +207,20 @@ void bye (void)
 void version (void)
 {
   fprintf (stdout, "%s\n", VERSION);
+}
+
+void print_history(void)
+{
+	HIST_ENTRY **hist_list = NULL;
+	int i = 0;
+
+	if ((hist_list = history_list()) != NULL )
+		for (i = 0; hist_list[i] != NULL; i++ )
+			fprintf (stdout, "%s\n", hist_list[i]->line);
+	else
+		fprintf (stdout, "Nao ha historico\n");
+	return;
+
 }
 
 void help (void)
