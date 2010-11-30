@@ -28,7 +28,6 @@ extern char *readline ();
 #  endif /* !defined(HAVE_READLINE_H) */
 char *cmdline = NULL;
 #else /* !defined(HAVE_READLINE_READLINE_H) */
-/* no readline */
 #endif /* HAVE_LIBREADLINE */
 
 #ifdef HAVE_READLINE_HISTORY
