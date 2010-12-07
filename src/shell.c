@@ -46,7 +46,7 @@ extern int read_history ();
 #endif /* HAVE_READLINE_HISTORY */
 
 
-#define PROMPT "\e[33m\e[41mproto-shell> "
+#define PROMPT "\e[33m\e[41mproto-shell>\e[0m "
 #define MAX_HISTORY 20
 
 char** parse (char *);
